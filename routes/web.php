@@ -3,6 +3,7 @@
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\SingleController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,3 +87,21 @@ Route::apiResources([
     'photos' => PhotoController::class,
     'posts' => PostController::class,
 ]);
+
+Route::get('/view',function(){
+    return view('another.first',[
+        "title" => "this is title of me",
+        // "name" => "this is name"
+    ]);
+});
+
+Route::get('/second',function(){
+    return view('another.second',[
+        "title" => "this is title of se onde",
+        // "name" => "this is name"
+    ]);
+});
+
+
+//query
+Route::get('insert',[TeacherController::class,'insert']);
