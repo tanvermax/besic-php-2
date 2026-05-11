@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\SingleController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
@@ -105,3 +108,21 @@ Route::get('/second',function(){
 
 //query
 Route::get('insert',[TeacherController::class,'insert']);
+Route::get('scope',[ClientController::class,'scope']);
+
+//\
+Route::post('form-submit',function(){
+return "Success";
+})->name('submit');
+
+// Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+
+
+Route::get('/form',[RequestController::class,'index']);
+
+Route::post('/form',[RequestController::class,'store'])->name('store');
+Route::get('/form',[RequestController::class,'store'])->name('store');
+
+
+Route::get('response',[ResponseController::class,'index']);
+Route::get('another-response',[ResponseController::class,'another']);
