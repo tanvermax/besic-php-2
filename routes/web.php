@@ -7,6 +7,7 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\SingleController;
 use App\Http\Controllers\TeacherController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $users = User::all();
+    return view('welcome', compact('users'));
 });
 
 
@@ -80,49 +82,83 @@ Route::get('/', function () {
 
 
 
-Route::get('first',[DemoController::class,'firstmethod'])->name('first');
-Route::get('user/{name}',[DemoController::class,'user']);
-Route::get('single',SingleController::class);
+Route::get('first', [DemoController::class, 'firstmethod'])->name('first');
+Route::get('user/{name}', [DemoController::class, 'user']);
+Route::get('single', SingleController::class);
 
-Route::resource("photo",PhotoController::class);
+Route::resource("photo", PhotoController::class);
 
-Route::apiResources([
-    'photos' => PhotoController::class,
-    'posts' => PostController::class,
-]);
+// Route::apiResources([
+//     'photos' => PhotoController::class,
+//     'posts' => PostController::class,
+// ]);
 
-Route::get('/view',function(){
-    return view('another.first',[
+Route::get('/view', function () {
+    return view('another.first', [
         "title" => "this is title of me",
         // "name" => "this is name"
     ]);
 });
 
-Route::get('/second',function(){
-    return view('another.second',[
+Route::get('/second', function () {
+    return view('another.second', [
         "title" => "this is title of se onde",
         // "name" => "this is name"
     ]);
 });
+//form
 
 
 //query
-Route::get('insert',[TeacherController::class,'insert']);
-Route::get('scope',[ClientController::class,'scope']);
+Route::get('insert', [TeacherController::class, 'insert']);
+Route::get('scope', [ClientController::class, 'scope']);
 
 //\
-Route::post('form-submit',function(){
-return "Success";
+Route::post('form-submit', function () {
+    return "Success";
 })->name('submit');
 
 // Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
 
 
-Route::get('/form',[RequestController::class,'index']);
+Route::get('/form', [RequestController::class, 'index'])->name('form');
 
-Route::post('/form',[RequestController::class,'store'])->name('store');
-Route::get('/form',[RequestController::class,'store'])->name('store');
+Route::post('/form', [RequestController::class, 'store'])->name('store');
+// Route::get('/form', [RequestController::class, 'store'])->name('store');
 
 
-Route::get('response',[ResponseController::class,'index']);
-Route::get('another-response',[ResponseController::class,'another']);
+Route::get('response', [ResponseController::class, 'index']);
+Route::get('another-response', [ResponseController::class, 'another']);
+
+Route::get('blade', function () {
+    return view('layouts.abc', [
+        "title" => "This is title of abc",
+        "html" => "  <h1>this is mnext line headiong</h1>",
+        "isActive" => false,
+        "users" => User::all()
+    ]);
+});
+
+
+#session
+Route::get('set', function () {
+    session()->flash("flash","Flash");
+    session()->put(["test"=>"test data"]);
+    session(["title" => "sesssion title", "another" => "another title"]);
+});
+
+Route::get('get', function () {
+    // if (session()->has("tests")) {
+    //     # code...
+    //     return session("test");
+    // }else{
+    //     return "not Exists";
+    // }
+    dd(session()->all());
+    return session("flash");
+});
+
+Route::get('delete', function () {
+    // session()->forget(["another","test"]);
+    session()->flush();
+});

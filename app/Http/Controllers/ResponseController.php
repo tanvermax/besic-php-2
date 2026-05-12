@@ -20,7 +20,7 @@ class ResponseController extends Controller
         // ]);
 
         return response()->json([
-'data'=>[10,20,20]
+            'data' => [10, 20, 20]
         ]);
     }
 

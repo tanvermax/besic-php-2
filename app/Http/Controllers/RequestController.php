@@ -13,6 +13,10 @@ class RequestController extends Controller
         return view('layouts.create');
     }
     public function store(Request $request){
-        return $request;
+        $request->validate([
+            'name'=>['required'],
+
+        ]);
+        return $request->all();
     }
 }
