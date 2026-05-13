@@ -7,6 +7,8 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\SingleController;
 use App\Http\Controllers\TeacherController;
+use App\Models\info;
+use App\Models\post;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -180,9 +182,44 @@ Route::get('one-to-one', function () {
     // $users = User::whereHas('info', function ($q) {
     //     return $q->whereNotNull('zip_code');
     // })->get();
-     $users = User::get();
+    $users = User::get();
 
 
 
     return view('show', compact('users'));
+});
+
+
+Route::get('belongsto', function () {
+
+    $info = info::find(2);
+    return $info->user;
+});
+
+
+Route::get('n-1', function () {
+
+    // $users = User::with('info')->get();
+    $users = User::get();
+    // $users->load('info'); //for n+1 problem 
+
+    return view('n1', compact('users'));
+});
+
+
+Route::get('one-to-many', function () {
+    // $user = User::find(1);
+    // // post::create([
+    // //     "user_id"=>$user->id,
+    // //     "name"=>'Post two'
+    // // ]);
+    // $user->posts()->create([
+    //     'name' => 'post 3'
+    // ]);
+
+
+    $post = post::find(1);
+    // return $user->posts;
+
+    return $post->user;
 });
