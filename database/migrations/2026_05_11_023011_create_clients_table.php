@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
              $table->string('name');
             $table->string('email')->unique();
+            $table->string('age')->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
+            $table->softDeletes();
             $table->string('company_name')->nullable();
             $table->string('status')->default('active');
             $table->timestamps();

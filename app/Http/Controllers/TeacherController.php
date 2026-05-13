@@ -18,4 +18,19 @@ class TeacherController extends Controller
             "address" => "Seoul, South Korea",
         ]);
     }
+
+
+    public function select()
+    {
+        $data = DB::table('admin')->get();
+        return $data;
+    }
+
+     public function update()
+    {
+        // $data = DB::table('admin')->increment('age',100);
+
+        $data = DB::table('admin')->where('id',2)->delete();
+        return $data;
+    }
 }

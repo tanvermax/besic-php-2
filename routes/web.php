@@ -111,9 +111,18 @@ Route::get('/second', function () {
 
 //query
 Route::get('insert', [TeacherController::class, 'insert']);
+// Route::get('scope', [ClientController::class, 'scope']);
+Route::get('create', [ClientController::class, 'index']);
+Route::get('fetch', [ClientController::class, 'fetch']);
+Route::get('clinetupdate', [ClientController::class, 'update']);
 Route::get('scope', [ClientController::class, 'scope']);
+Route::get('clinetDelte', [ClientController::class, 'delete']);
 
-//\
+
+Route::get('select', [TeacherController::class, 'select']);
+Route::get('update', [TeacherController::class, 'update']);
+
+//
 Route::post('form-submit', function () {
     return "Success";
 })->name('submit');
@@ -142,8 +151,8 @@ Route::get('blade', function () {
 
 #session
 Route::get('set', function () {
-    session()->flash("flash","Flash");
-    session()->put(["test"=>"test data"]);
+    session()->flash("flash", "Flash");
+    session()->put(["test" => "test data"]);
     session(["title" => "sesssion title", "another" => "another title"]);
 });
 
@@ -161,4 +170,19 @@ Route::get('get', function () {
 Route::get('delete', function () {
     // session()->forget(["another","test"]);
     session()->flush();
+});
+
+
+Route::get('one-to-one', function () {
+
+    // $data = User::find(1)->info;
+
+    // $users = User::whereHas('info', function ($q) {
+    //     return $q->whereNotNull('zip_code');
+    // })->get();
+     $users = User::get();
+
+
+
+    return view('show', compact('users'));
 });
