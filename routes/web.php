@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\RequestController;
@@ -12,6 +13,7 @@ use App\Models\Distric;
 use App\Models\Division;
 use App\Models\Info;
 use App\Models\post;
+use App\Models\Product;
 use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +48,21 @@ Route::get('/', function () {
 });
 
 Route::get('/poly', function () {
+
+    // $p1 = Product::create([
+    //     "name"=>'p1'
+    // ]);
+    // $p1->comments()->create([
+    //     'body' => "tension ace onk"
+    // ]);
+
+    //  $p1 = post::create([
+    //     "name"=>'p1'
+    // ]);
+    // $p1->comments()->create([
+    //     'body' => "tension ace onk"
+    // ]);
+
     // // $users = User::all();
 
     // $user = User::create([
@@ -57,6 +74,7 @@ Route::get('/poly', function () {
     //     "address" => "pakistan"
     // ]);
     // return view('poly');
+    return Product::with("comments")->find(1);
     // return view('welcome', compact('users'));
 });
 
@@ -166,7 +184,7 @@ Route::post('form-submit', function () {
 
 Route::get('/form', [RequestController::class, 'index'])->name('form');
 
-Route::post('/form', [RequestController::class, 'store'])->name('store');
+// Route::post('/form', [RequestController::class, 'store'])->name('store');
 // Route::get('/form', [RequestController::class, 'store'])->name('store');
 
 
@@ -258,6 +276,24 @@ Route::get('one-to-many', function () {
 
 
 
+
+Route::controller(DashboardController::class)->group(function () {
+
+    Route::get('/dashboard', 'index');
+
+    Route::get('/home', 'home');
+
+    Route::get('/products/create', 'createProduct')->name('products.create');
+    Route::post('/store', 'store')->name('store');
+
+    Route::get('/users', 'users');
+
+    Route::get('/settings', 'settings');
+
+});
+
+
+
 Route::get('many', function () {
     $user = User::find(5);
     return  $skill = Skill::with('users')->find(1);
@@ -275,7 +311,6 @@ Route::get('many', function () {
 
 Route::get('/has', function () {
 
-$div= Division::find(2);
-return $div->load('thanas');
+    $div = Division::find(2);
+    return $div->load('thanas');
 });
-

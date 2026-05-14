@@ -1,24 +1,21 @@
 <?php
 
-
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class post extends Model
+class Product extends Model
 {
     use HasFactory;
-    protected $guarded = [];
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-
-
-
-
+    // protected $guarded = [];
+    protected $fillable = ['name','slug','price']; 
+    
+    
     public function comments()
     {
+        // Ekhane 'commentable' holo oi prefix jeta database-er column-e ache (commentable_id, commentable_type)
         return $this->morphMany(Comments::class, 'commentable');
     }
 }
