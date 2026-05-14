@@ -4,8 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Distric;
+use App\Models\Division;
 use App\Models\info;
 use App\Models\Skill;
+use App\Models\Thana;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -20,7 +23,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
 
-    
+
     public function run()
     {
         // \App\Models\User::factory(10)->create();
@@ -30,10 +33,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $data= ['PHP','JS','REACT','Python'];
+        $data = ['PHP', 'JS', 'REACT', 'Python'];
 
-        foreach($data as $d){
-            Skill::create(["name"=>$d]);
+        foreach ($data as $d) {
+            Skill::create(["name" => $d]);
         }
 
 
@@ -42,11 +45,32 @@ class DatabaseSeeder extends Seeder
                 'name' => "User $i",
                 'email' => "user$i@example.com",
                 'password' => bcrypt('password123'),
-        ]);
+            ]);
+
+
+            for ($i = 0; $i < 10; $i++) {
+                Division::create([
+                    'name' => "Div $i"
+                ]);
+            };
+             for ($i = 0; $i < 10; $i++) {
+                Distric::create([
+                    "division_id"=>rand(1,5),
+                    'name' => "District $i"
+                ]);
+            };
+
+            for ($i = 0; $i < 10; $i++) {
+                Thana::create([
+                    "district_id"=>rand(1,10),
+                    'name' => "Thana $i"
+                ]);
+            };
+
 
 
             # code...
-        info::create([
+            info::create([
                 "user_id" => $i,
                 "address" => "Dhaka $i",
                 "zip_code" => $i % 2 == 0 ? rand(100, 200) : null,

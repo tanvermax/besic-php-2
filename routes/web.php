@@ -8,11 +8,14 @@ use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\SingleController;
 use App\Http\Controllers\TeacherController;
 use App\Models\Admin;
+use App\Models\Distric;
+use App\Models\Division;
 use App\Models\Info;
 use App\Models\post;
 use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Termwind\Components\Div;
 
 /*
 |--------------------------------------------------------------------------
@@ -267,3 +270,12 @@ Route::get('many', function () {
 
 
 });
+
+
+
+Route::get('/has', function () {
+
+$div= Division::find(2);
+return $div->load('thanas');
+});
+
