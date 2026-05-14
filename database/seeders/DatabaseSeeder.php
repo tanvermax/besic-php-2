@@ -9,6 +9,9 @@ use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
+
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -32,14 +35,18 @@ class DatabaseSeeder extends Seeder
         foreach($data as $d){
             Skill::create(["name"=>$d]);
         }
+
+
         for ($i = 0; $i < 10; $i++) {
             $user = User::create([
                 'name' => "User $i",
                 'email' => "user$i@example.com",
                 'password' => bcrypt('password123'),
-            ]);
+        ]);
+
+
             # code...
-            info::create([
+        info::create([
                 "user_id" => $i,
                 "address" => "Dhaka $i",
                 "zip_code" => $i % 2 == 0 ? rand(100, 200) : null,

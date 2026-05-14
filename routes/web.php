@@ -7,8 +7,10 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\SingleController;
 use App\Http\Controllers\TeacherController;
-use App\Models\info;
+use App\Models\Admin;
+use App\Models\Info;
 use App\Models\post;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -24,8 +26,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $users = User::all();
-    return view('welcome', compact('users'));
+    // $users = User::all();
+
+    // $user = Admin::create([
+    //     'name' => "admin2",
+    //     'email' => "admin2@gmail.com",
+    //     "password" => "pass"
+    // ]);
+    // $user->info()->create([
+    //     "address" => "UAE"
+    // ]);
+
+    return Info::with('infoable')->find(4);
+    // return view('poly');
+    // return view('welcome', compact('users'));
+});
+
+Route::get('/poly', function () {
+    // // $users = User::all();
+
+    // $user = User::create([
+    //     'name' => "e",
+    //     'email' => "eccdfv@gmail.com",
+    //     "password" => "pass"
+    // ]);
+    // $user->info()->create([
+    //     "address" => "pakistan"
+    // ]);
+    // return view('poly');
+    // return view('welcome', compact('users'));
 });
 
 
@@ -222,4 +251,19 @@ Route::get('one-to-many', function () {
     // return $user->posts;
 
     return $post->user;
+});
+
+
+
+Route::get('many', function () {
+    $user = User::find(5);
+    return  $skill = Skill::with('users')->find(1);
+    // $user->skilss()->attach([1,2]);
+    // $user->skilss()->detach([1]);
+    // $user->skilss()->sync([1,3]);
+
+    // return $user->load('skilss');
+
+
+
 });
