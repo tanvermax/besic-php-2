@@ -30,7 +30,8 @@ class DashboardController extends Controller
 
     public function createProduct()
     {
-        return view('dashboard.product.create');
+        $products=Product::latest()->get();
+        return view('dashboard.product.create',compact('products'));
     }
     public function store(Request $request)
     {

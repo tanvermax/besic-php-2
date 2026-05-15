@@ -3,12 +3,18 @@
 @section('content')
 
 <h2 class="mb-4">Add Product</h2>
+
 <style>
     .text-danger{
         color: red;
         font-style: italic;
     }
+    .product{
+        display: flex;
+    }
 </style>
+
+<div class="product">
 <form action="{{ route('store') }}" method="POST">
 
     @csrf
@@ -78,5 +84,48 @@
    
 
 </form>
+<hr class="my-5">
+
+<h2>All Products</h2>
+
+<table class="table table-bordered table-striped mt-3">
+
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Price</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @forelse ($products as $product)
+
+        <tr>
+            <td>{{ $product->id }}</td>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->slug }}</td>
+            <td>{{ $product->price }}</td>
+            <td>{{ $product->created_at->format('d M Y') }}</td>
+        </tr>
+
+        @empty
+
+        <tr>
+            <td colspan="5" class="text-center">
+                No Products Found
+            </td>
+        </tr>
+
+        @endforelse
+
+    </tbody>
+
+</table>
+</div>
 
 @endsection
+
