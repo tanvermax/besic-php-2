@@ -284,11 +284,15 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get('/home', 'home');
 
     Route::get('/products/create', 'createProduct')->name('products.create');
+    Route::get('/product/edit/{id}','product_edit')->name('product.edit');
+    Route::post('/product/update/{id}', 'product_update')->name('product.update');
+    Route::get('product/{id}','product_delete')->name('product.delete');
     Route::post('/store', 'store')->name('store');
 
     Route::get('/users', 'users');
 
     Route::get('/settings', 'settings');
+    
 
 });
 

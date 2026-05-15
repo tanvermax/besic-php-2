@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2 class="mb-4">Add Product</h2>
+
 
 <style>
     .text-danger{
@@ -11,12 +11,17 @@
     }
     .product{
         display: flex;
+        /* justify-content: space-between; */
+        justify-items: center;
+    }
+    .deleteb{
+        background-color: #d66b6b;
     }
 </style>
 
-<div class="product">
+<div class="product gap-5">
 <form action="{{ route('store') }}" method="POST">
-
+<h2 class="mb-4">Add Product</h2>
     @csrf
 
     <!-- Product Name -->
@@ -78,13 +83,14 @@
     <!-- Success Alert -->
     <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
         <strong>{{ session('message') }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <button type="button" class="btn-close text-red" data-bs-dismiss="alert"></button>
     </div>
     @endif
    
 
 </form>
-<hr class="my-5">
+<div>
+
 
 <h2>All Products</h2>
 
@@ -97,6 +103,7 @@
             <th>Slug</th>
             <th>Price</th>
             <th>Created At</th>
+             <th>Action</th>
         </tr>
     </thead>
 
@@ -110,6 +117,17 @@
             <td>{{ $product->slug }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->created_at->format('d M Y') }}</td>
+            <td class="flex gap-1">
+
+        <a 
+            href="{{ route('product.edit', $product->id) }}"
+            class="btn btn-sm btn-warning"
+        >
+            Edit
+        </a>
+        <a href="{{ route('product.delete', $product->id) }}" class="border deleteb">Delete</a>
+
+    </td>
         </tr>
 
         @empty
@@ -125,6 +143,7 @@
     </tbody>
 
 </table>
+</div>
 </div>
 
 @endsection
