@@ -2,9 +2,25 @@
 
 @section('content')
 
-<h2>Admin Dashboard</h2>
-<p>Welcome to Laravel Dashboard</p>
-
+<div class="row ">
+    <div>
+        <h2>Admin Dashboard</h2>
+        <p>Welcome to Laravel Dashboard</p>
+    </div>
+    <div>
+        @auth
+        {{ Auth::user()->name }}
+        @endauth
+        <form
+         action="{{ route('logout') }}"
+          method="POST">
+            @csrf
+            <button class="btn btn-danger btn-sm">
+                Logout
+            </button>
+        </form>
+    </div>
+</div>
 <div class="row mt-4">
 
     <div class="col-md-4">

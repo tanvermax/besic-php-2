@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DemoController;
@@ -31,21 +32,25 @@ use Termwind\Components\Div;
 */
 
 Route::get('/', function () {
-    // $users = User::all();
+    $users = User::all();
 
-    // $user = Admin::create([
-    //     'name' => "admin2",
-    //     'email' => "admin2@gmail.com",
-    //     "password" => "pass"
-    // ]);
+    //   return  $user = User::create([
+    //         'name' => "test34",
+    //         'email' => "test4@gmail.com",
+    //         "password" => "password"
+    //     ]);
     // $user->info()->create([
     //     "address" => "UAE"
     // ]);
 
-    return Info::with('infoable')->find(4);
+    // return Info::with('infoable')->find(4);
     // return view('poly');
-    // return view('welcome', compact('users'));
+    return view('welcome', compact('users'));
 });
+
+
+
+
 
 Route::get('/poly', function () {
 
@@ -277,23 +282,32 @@ Route::get('one-to-many', function () {
 
 
 
+Route::controller(AuthController::class)->group(function(){
+
+Route::get('/login','login' )->name('login');
+Route::get('/registration','registration')->name('registration');
+Route::post('/authenticate','authenticate')->name('authenticate');
+Route::post('/register','store')->name('auth.store');
+Route::post('/logout','logout')->name('logout');
+
+});
+
+
 Route::controller(DashboardController::class)->group(function () {
 
-    Route::get('/dashboard', 'index');
+    Route::get('/dashboard', 'index')->name('dashboard')->middleware('auth');
 
     Route::get('/home', 'home');
 
     Route::get('/products/create', 'createProduct')->name('products.create');
-    Route::get('/product/edit/{id}','product_edit')->name('product.edit');
+    Route::get('/product/edit/{id}', 'product_edit')->name('product.edit');
     Route::post('/product/update/{id}', 'product_update')->name('product.update');
-    Route::get('product/{id}','product_delete')->name('product.delete');
+    Route::get('product/{id}', 'product_delete')->name('product.delete');
     Route::post('/store', 'store')->name('store');
 
     Route::get('/users', 'users');
 
     Route::get('/settings', 'settings');
-    
-
 });
 
 

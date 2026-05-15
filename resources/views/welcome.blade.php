@@ -391,76 +391,255 @@
     </style>
 </head>
 
-<body class="antialiased w-[100px] mx-auto">
-    <div class="card-body p-5 border-2 mx-10 border-red-700 rounde-xl">
-        <form action="{{ route('submit') }}" method="POST">
-            @csrf
+<body style="font-family: 'Nunito', sans-serif; background: #f8fafc;">
 
-            <div class="mb-3">
-                <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                    id="name" name="name" value="{{ old('name') }}" required>
-                @error('name')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3 text-primary" href="#">
+                ShopNest
+            </a>
+
+            <div>
+                <a href="/login" class="btn btn-outline-primary me-2">Login</a>
+                <a href="/registration" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5"
+        style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white;">
+
+        <div class="container">
+            <div class="row align-items-center g-5">
+
+                <!-- Left Content -->
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">
+                        Build Your Ecommerce Business Faster
+                    </h1>
+
+                    <p class="lead mb-4">
+                        Manage customers, products, and orders easily with our modern platform.
+                    </p>
+
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-light btn-lg px-4">
+                            Start Free
+                        </button>
+
+                        <button class="btn btn-outline-light btn-lg px-4">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Form -->
+                <div class="col-lg-5 offset-lg-1">
+
+                    <div class="card border-0 shadow-lg rounded-4">
+                        <div class="card-body p-5">
+
+                            <h2 class="fw-bold mb-4 text-center">
+                                Client Registration
+                            </h2>
+
+                            <form action="{{ route('submit') }}" method="POST">
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">
+                                        Full Name
+                                    </label>
+
+                                    <input type="text"
+                                        class="form-control form-control-lg @error('name') is-invalid @enderror"
+                                        name="name"
+                                        value="{{ old('name') }}"
+                                        placeholder="Enter your full name">
+
+                                    @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">
+                                        Email Address
+                                    </label>
+
+                                    <input type="email"
+                                        class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                        name="email"
+                                        value="{{ old('email') }}"
+                                        placeholder="Enter your email">
+
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">
+                                        Phone Number
+                                    </label>
+
+                                    <input type="text"
+                                        class="form-control form-control-lg @error('phone') is-invalid @enderror"
+                                        name="phone"
+                                        value="{{ old('phone') }}"
+                                        placeholder="Enter your phone">
+
+                                    @error('phone')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">
+                                        Company Name
+                                    </label>
+
+                                    <input type="text"
+                                        class="form-control form-control-lg @error('company_name') is-invalid @enderror"
+                                        name="company_name"
+                                        value="{{ old('company_name') }}"
+                                        placeholder="Your company">
+
+                                    @error('company_name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">
+                                        Address
+                                    </label>
+
+                                    <textarea
+                                        class="form-control @error('address') is-invalid @enderror"
+                                        name="address"
+                                        rows="3"
+                                        placeholder="Enter address">{{ old('address') }}</textarea>
+
+                                    @error('address')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label fw-semibold">
+                                        Status
+                                    </label>
+
+                                    <select
+                                        class="form-select form-select-lg @error('status') is-invalid @enderror"
+                                        name="status">
+
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+
+                                    </select>
+
+                                    @error('status')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary btn-lg w-100 py-3 rounded-3">
+
+                                    <i class="fas fa-save me-2"></i>
+                                    Save Client
+
+                                </button>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Features -->
+    <section class="py-5 bg-white">
+        <div class="container">
+
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Why Choose ShopNest?</h2>
+                <p class="text-muted">
+                    Everything you need to grow your online business
+                </p>
             </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                <input type="email" class="form-control @error('email') is-invalid @enderror"
-                    id="email" name="email" value="{{ old('email') }}" required>
-                @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 rounded-4">
+                        <div class="card-body p-4 text-center">
+
+                            <div class="fs-1 text-primary mb-3">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+
+                            <h4 class="fw-bold">Easy Management</h4>
+
+                            <p class="text-muted">
+                                Manage customers and orders smoothly.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 rounded-4">
+                        <div class="card-body p-4 text-center">
+
+                            <div class="fs-1 text-success mb-3">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+
+                            <h4 class="fw-bold">Business Growth</h4>
+
+                            <p class="text-muted">
+                                Track performance and grow faster.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 rounded-4">
+                        <div class="card-body p-4 text-center">
+
+                            <div class="fs-1 text-danger mb-3">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+
+                            <h4 class="fw-bold">Secure Platform</h4>
+
+                            <p class="text-muted">
+                                Your data stays protected and safe.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="mb-3">
-                <label for="phone" class="form-label">Phone Number</label>
-                <input type="text" class="form-control @error('phone') is-invalid @enderror"
-                    id="phone" name="phone" value="{{ old('phone') }}">
-                @error('phone')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
+        </div>
+    </section>
 
-            <div class="mb-3">
-                <label for="company_name" class="form-label">Company Name</label>
-                <input type="text" class="form-control @error('company_name') is-invalid @enderror"
-                    id="company_name" name="company_name" value="{{ old('company_name') }}">
-                @error('company_name')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <textarea class="form-control @error('address') is-invalid @enderror"
-                    id="address" name="address" rows="3">{{ old('address') }}</textarea>
-                @error('address')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
-                <select class="form-control @error('status') is-invalid @enderror"
-                    id="status" name="status">
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                </select>
-                @error('status')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save"></i> Save Client
-                </button>
-
-            </div>
-        </form>
-    </div>
 </body>
 
 </html>

@@ -72,7 +72,7 @@
         @enderror
     </div>
 
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-success">
         Add Product
     </button>
 
@@ -96,7 +96,7 @@
 
 <table class="table table-bordered table-striped mt-3">
 
-    <thead class="table-dark">
+    <thead class="table-primary">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -112,7 +112,7 @@
         @forelse ($products as $product)
 
         <tr>
-            <td>{{ $product->id }}</td>
+            <td>{{ $loop->iteration }}</td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->slug }}</td>
             <td>{{ $product->price }}</td>
@@ -121,11 +121,11 @@
 
         <a 
             href="{{ route('product.edit', $product->id) }}"
-            class="btn btn-sm btn-warning"
+            class="btn btn-primary"
         >
             Edit
         </a>
-        <a href="{{ route('product.delete', $product->id) }}" class="border deleteb">Delete</a>
+        <a href="{{ route('product.delete', $product->id) }}" class="btn btn-danger  debleteb">Delete</a>
 
     </td>
         </tr>

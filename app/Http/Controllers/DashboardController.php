@@ -59,43 +59,43 @@ class DashboardController extends Controller
         return view('dashboard.product.edit', compact('product'));
     }
 
-    
-   public function product_update(Request $request, $id)
+
+    public function product_update(Request $request, $id)
     {
-    $request->validate([
-        'name' => ['required'],
-        'price' => ['required'],
-    ]);
+        $request->validate([
+            'name' => ['required'],
+            'price' => ['required'],
+        ]);
 
-    $product = Product::findOrFail($id);
+        $product = Product::findOrFail($id);
 
-    $product->update([
-        'name' => $request->name,
-        'slug' => $request->slug,
-        'price' => $request->price,
-    ]);
-  
-    if ($product) {
+        $product->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'price' => $request->price,
+        ]);
+
+        if ($product) {
             # code...
             session()->flash('message', "product update sussesfully");
             session()->flash('type', "sussess");
             return redirect()->route('products.create');
         }
 
-    // return redirect()->route('products.create')
-    //     ->with('message', 'Product updated successfully!');
+        // return redirect()->route('products.create')
+        //     ->with('message', 'Product updated successfully!');
     }
+
 
     public function product_delete($id)
     {
-        $product=Product::findOrFail($id)->delete();
-    //     return redirect()->with([
-    //     'message' => 'Product deleted successfully',
-    //     'type' => 'success'
-    // ]);
-     session()->flash('message', "product delete sussesfully");
-            session()->flash('type', "warn");
-            return redirect()->route('products.create');
-
+        $product = Product::findOrFail($id)->delete();
+        //     return redirect()->with([
+        //     'message' => 'Product deleted successfully',
+        //     'type' => 'success'
+        // ]);
+        session()->flash('message', "product delete sussesfully");
+        session()->flash('type', "warn");
+        return redirect()->route('products.create');
     }
 }

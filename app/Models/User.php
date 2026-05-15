@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Events\UserCreatedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -15,7 +17,9 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     // protected $with=[
-
+    protected $dispatchesEvents = [
+        "created" => UserCreatedEvent::class
+    ];
     // 'info'
     // ];
     /**
@@ -68,5 +72,12 @@ class User extends Authenticatable
     public function skilss()
     {
         return $this->belongsToMany(Skill::class, 'skill_users');
+    }
+
+    public static function booted()
+    {
+        static::created(function ($user) {
+            info("i am from call back function");
+        });
     }
 }
