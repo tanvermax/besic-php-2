@@ -32,7 +32,7 @@ use Termwind\Components\Div;
 */
 
 Route::get('/', function () {
-    $users = User::all();
+
 
     //   return  $user = User::create([
     //         'name' => "test34",
@@ -45,7 +45,7 @@ Route::get('/', function () {
 
     // return Info::with('infoable')->find(4);
     // return view('poly');
-    return view('welcome', compact('users'));
+    return view('welcome');
 });
 
 
